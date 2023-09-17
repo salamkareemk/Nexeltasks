@@ -1,0 +1,79 @@
+# Sample data for destinations and their attributes
+destinations = [
+    {
+        'name': 'Paris',
+        'weather': 'Mild',
+        'interests': ['Culture', 'Art', 'Cuisine'],
+    },
+    {
+        'name': 'Bali',
+        'weather': 'Warm',
+        'interests': ['Beach', 'Adventure', 'Relaxation'],
+    },
+    {
+        'name': 'Tokyo',
+        'weather': 'Moderate',
+        'interests': ['Culture', 'Food', 'Technology'],
+    },
+    {
+        'name': 'New York City',
+        'weather': 'Mild',
+        'interests': ['Culture', 'Shopping', 'Food'],
+    },
+    {
+        'name': 'Rio de Janeiro',
+        'weather': 'Warm',
+        'interests': ['Beach', 'Culture', 'Carnival'],
+    },
+    {
+        'name': 'Sydney',
+        'weather': 'Moderate',
+        'interests': ['Beach', 'Adventure', 'Nature'],
+    },
+    {
+        'name': 'Rome',
+        'weather': 'Mild',
+        'interests': ['Culture', 'History', 'Cuisine'],
+    },
+    {
+        'name': 'Cancún',
+        'weather': 'Warm',
+        'interests': ['Beach', 'Adventure', 'Nightlife'],
+    },
+    {
+        'name': 'Cape Town',
+        'weather': 'Moderate',
+        'interests': ['Nature', 'Adventure', 'Culture'],
+    },
+]
+
+
+# Function to recommend a destination
+def recommend_destination(user_prefs, destinations_list):
+    recommended_destinations = []
+    for destination in destinations_list:
+        if (
+            destination['weather'] == user_prefs['weather']
+            and any(topic in destination['interests'] for topic in user_prefs['interests'])
+        ):
+            recommended_destinations.append(destination['name'])
+    return recommended_destinations
+
+# Get user preferences from input
+user_weather = input("Enter your preferred weather (e.g., Warm, Mild, Moderate): ")
+user_interests = input("Enter your interests separated by commas (e.g., Beach, Adventure): ").split(',')
+
+user_preferences = {
+    'weather': user_weather.strip(),
+    'interests': [interest.strip() for interest in user_interests],
+}
+
+# Get recommendations for the user
+recommended_places = recommend_destination(user_preferences, destinations)
+
+if recommended_places:
+    print("Recommended destinations:")
+    for place in recommended_places:
+        print(place)
+else:
+    print("Sorry, no matching destinations found based on your preferences."
